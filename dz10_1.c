@@ -19,7 +19,7 @@ char work_area[WORK_SIZE];
 
 int main(int argc, char *argv[]) {
     srand(time(NULL));
-    if (argc < 5) //Ð•ÑÐ»Ð¸ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð² ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐµ Ð¼Ð°Ð»Ð¾ Ñ‚Ð¾ Ð¾ÑˆÐ¸Ð±ÐºÐ°
+    if (argc < 5) 
 	{
 		fprintf(stderr, "Too few arguments\n");
 		return 1;
@@ -53,7 +53,6 @@ void *consumer_thread(void *arg) {
         sem_wait(&complite_sem);
 
         arr[currentN] = 0;
-        currentN--;
 
         sem_post(&complite_sem);
         sem_post(&consumer_sem);
@@ -62,7 +61,7 @@ void *consumer_thread(void *arg) {
         for (i = 0; i < currentN; i++) {
             fprintf(stderr, "%d ", arr[i]);
         }
-
+	    currentN--;
         fprintf(stderr, " - Consume\n");
     }
 
